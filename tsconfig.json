@@ -3,7 +3,8 @@
     "target": "es6",
     "module": "commonjs",
     "lib": [
-      "esnext",
+      "es6",
+      "ESNext",
       "dom",
       "dom.iterable",
       "scripthost"
@@ -24,11 +25,8 @@
       ]
     },
   },
-
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
+    "src/**/*",
     "node_modules/**/*"
   ],
   "exclude": [

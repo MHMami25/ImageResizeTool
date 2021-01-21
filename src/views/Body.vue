@@ -2,7 +2,7 @@
   <div class="body">
     <Image @getFileEvent="getFiles"></Image>
     <InputValue
-      :files="sendFiles"
+      :filelength="sendFileLength"
       @getResizeEvent="getResizeValue"
     ></InputValue>
   </div>
@@ -10,8 +10,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from "vue";
-import Image from "@/components/Image.vue";
-import InputValue from "@/components/InputValue.vue";
+import {Image, InputValue} from "@/components/index";
 
 interface ImageData {
   files: FileList[];
@@ -37,11 +36,14 @@ export default defineComponent({
       imagedata.files = files;
     };
 
-    const sendFiles = () => {
-      return imagedata.files;
+    const sendFileLength = () => {
+      console.log(imagedata.files);
+      return imagedata.files.length;
     };
 
     const getResizeValue = () => {};
+
+    return { sendFileLength };
   },
 });
 </script>

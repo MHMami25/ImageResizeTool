@@ -11,37 +11,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
-
-export default defineComponent({
-  name: "Image",
-  setup(props, context) {
-    let isEnter = ref(false);
-    let files: FileList[];
-
-    const dragEnter = () => {
-      console.log("Enter Drop Area");
-      isEnter.value = true;
-    };
-
-    const dragLeave = () => {
-      isEnter.value = false;
-    };
-
-    const dragOver = () => {
-      console.log("DragOver");
-    };
-
-    const dropFile = (event: any) => {
-      console.log(event.dataTransfer.files);
-      files = [event.dataTransfer.files];
-      context.emit("getFileEvent", files);
-    };
-    return { isEnter, dragEnter, dragLeave, dragOver };
-  },
-});
-</script>
+<script lang="ts" src="./Image.ts"></script>
 
 <style lang="scss">
 .image-drop-area {
