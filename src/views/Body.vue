@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from "vue";
-import {Image, InputValue} from "@/components/index";
+import { Image, InputValue } from "@/components/index";
 
 interface ImageData {
   files: FileList[];
