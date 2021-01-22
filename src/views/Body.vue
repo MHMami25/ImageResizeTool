@@ -14,11 +14,12 @@ import imageCompression from "browser-image-compression";
 import fs from "fs";
 import ImageData from "@/common/interface/ImageData";
 import Size from "@/common/interface/Size";
-import { Image, InputValue } from "@/components/index";
+import { ErrorModal, Image, InputValue } from "@/components/index";
 
 export default defineComponent({
   name: "Body",
   components: {
+    ErrorModal,
     Image,
     InputValue,
   },
@@ -29,6 +30,8 @@ export default defineComponent({
       width: 0,
       height: 0,
     });
+
+    let modal = ref(false);
 
     //Image→Body:ファイルリストを取得
     const getFiles = (files: FileList) => {
@@ -52,6 +55,7 @@ export default defineComponent({
       saveResizedImage(resizedimage);
     };
 
+    //エラーハンドラー
     onErrorCaptured((err, vm, info) => {
       return true;
     });
