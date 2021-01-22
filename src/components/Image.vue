@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, onErrorCaptured, reactive, ref } from "vue";
 
 export default defineComponent({
   name: "Image",
@@ -30,10 +30,17 @@ export default defineComponent({
     };
 
     const dropFile = (event: any) => {
+      throw new Error("エラーを発生させた");
+
       files = event.dataTransfer.files;
       context.emit("getFileEvent", files);
       isEnter.value = false;
     };
+
+    onErrorCaptured((err, vm, info) => {
+      return true;
+    });
+
     return { isEnter, dragEnter, dragLeave, dropFile };
   },
 });

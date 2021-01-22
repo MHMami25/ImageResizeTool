@@ -5,7 +5,6 @@
   </div>
 </template>
 
-
 <style lang="sass">
 #app
   font-family: Avenir, Helvetica, Arial, sans-serif

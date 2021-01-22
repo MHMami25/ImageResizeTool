@@ -21,8 +21,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, toRef, toRefs } from "vue";
-import Size  from "@/common/interface/Size";
+import {
+  Component,
+  defineComponent,
+  onErrorCaptured,
+  reactive,
+  ref,
+  toRef,
+  toRefs
+} from "vue";
+import Size from "@/common/interface/Size";
+
 
 export default defineComponent({
   name: "InputValue",
@@ -39,6 +48,10 @@ export default defineComponent({
     const doResize = () => {
       context.emit("getResizeEvent", size);
     };
+
+    onErrorCaptured((err, vm, info) => {
+      return true;
+    });
     return { size, filelength };
   },
 });

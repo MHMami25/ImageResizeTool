@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, onErrorCaptured, reactive, ref } from "vue";
 import imageCompression from "browser-image-compression";
 import fs from "fs";
 import ImageData from "@/common/interface/ImageData";
@@ -51,6 +51,10 @@ export default defineComponent({
       //画像保存処理へ
       saveResizedImage(resizedimage);
     };
+
+    onErrorCaptured((err, vm, info) => {
+      return true;
+    });
 
     return { sendFileLength };
   },
