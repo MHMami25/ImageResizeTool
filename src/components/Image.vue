@@ -18,7 +18,7 @@ export default defineComponent({
   name: "Image",
   setup(props, context) {
     let isEnter = ref(false);
-    let files: FileList[];
+    let files: FileList;
 
     const dragEnter = () => {
       console.log("Enter Drop Area");
@@ -30,7 +30,8 @@ export default defineComponent({
     };
 
     const dropFile = (event: any) => {
-      files = [event.dataTransfer.files];
+      files = event.dataTransfer.files;
+      context.emit("getFileEvent", files);
       isEnter.value = false;
     };
     return { isEnter, dragEnter, dragLeave, dropFile };
