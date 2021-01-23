@@ -1,5 +1,6 @@
 import { defineComponent, onErrorCaptured, reactive, ref } from "vue";
 import FileListInterface from "@/common/class/FileListInterface";
+import { exception } from "console";
 
 export default defineComponent({
   name: "Image",
@@ -8,6 +9,7 @@ export default defineComponent({
     let files: FileListInterface = new FileListInterface();
 
     const dragEnter = () => {
+      throw new Error("エラーが発生した");
       console.log("Enter Drop Area");
       isEnter.value = true;
     };

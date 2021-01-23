@@ -46,6 +46,7 @@ export default defineComponent({
 
         //エラーハンドラー
         onErrorCaptured((err, vm, info) => {
+            console.log("エラーキャンっち");
             return true;
         });
 

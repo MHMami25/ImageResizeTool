@@ -2,14 +2,11 @@
   <div id="app">
     <router-link to="/">home</router-link>
     <router-view />
-    <ErrorModal @close="closeModal" v-if="modal">
+    <ErrorModal @closeErrorModalEvent="closeErrorModal" v-if="modal">
       <p>Vue.js Modal Window!</p>
       <div><input v-model="message" /></div>
       <!-- /default -->
       <!-- footer スロットコンテンツ -->
-      <template slot="footer">
-        <button>送信</button>
-      </template>
     </ErrorModal>
   </div>
 </template>
