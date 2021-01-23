@@ -1,10 +1,12 @@
 import { defineComponent, onErrorCaptured, reactive, ref } from "vue";
 import imageCompression from "browser-image-compression";
 import fs from "fs";
+import Jimp from "jimp";
 import ImageData from "@/common/interface/ImageData";
 import Size from "@/common/interface/Size";
-import { Image, InputValue } from "@/components/index";
 import FileListInterface from "@/common/class/FileListInterface";
+import DefineValueObject from '@/common/lib/DefineValueObject'
+import { Image, InputValue } from "@/components/index";
 
 export default defineComponent({
     name: "Body",
@@ -16,6 +18,8 @@ export default defineComponent({
     setup(prop, context) {
         let imagedata: ImageData = reactive({
             files: new FileListInterface(),
+            beforeFilePath: "",
+            tmpFilePath: "",
             width: 0,
             height: 0,
         });
@@ -25,6 +29,7 @@ export default defineComponent({
         //Image→Body:ファイルリストを取得
         const getFiles = (files: FileList) => {
             imagedata.files.setFileList(files);
+            imagedata.beforeFilePath = files[0].path;
         };
         //Body→InputValue:ファイルリストの長さを送信
         const sendFileLength = () => {
@@ -33,41 +38,53 @@ export default defineComponent({
         };
         //
         const getResizeValue = async (size: Size) => {
+
             //格納画像データ
-            let resizedimage: File;
             imagedata.width = size.width;
             imagedata.height = size.height;
 
+            //一時フォルダ作成
+            imagedata.tmpFilePath = makeTmpDir();
             //リサイズ処理へ
-            resizedimage = await doResizeImage(imagedata);
-            //画像保存処理へ
-            saveResizedImage(resizedimage);
+            await doResizeImage(imagedata);
+            //画像を指定のフォルダに保存
+            await saveImage(imagedata);
         };
 
         //エラーハンドラー
         onErrorCaptured((err, vm, info) => {
-            console.log("エラーキャンっち");
             return true;
         });
 
-        return { sendFileLength };
+        return { getFiles, sendFileLength, getResizeValue };
     },
 });
 
-const doResizeImage = async (imagedata: ImageData) => {
-    fs.copyFile("data.txt", "data.bak", (err) => {
-        if (err) {
-            console.log(err.stack);
-        } else {
-            console.log("Done.");
-        }
-    });
+const makeTmpDir = () => {
 
-    console.log("lets resize");
-    const options = {
-        maxSizeMB: 3,
-    };
-    return await imageCompression(imagedata.files[0], options);
+    //tmpディレクトリ作成
+    if (!fs.existsSync(DefineValueObject.appPath + "/tmp")) {
+        fs.mkdirSync(DefineValueObject.appPath + "/tmp");
+    }
+
+    return DefineValueObject.appPath + "/tmp/" + DefineValueObject.tmpFileName + ".png";
+}
+
+const doResizeImage = async (imagedata: ImageData) => {
+
+    Jimp.read(imagedata.beforeFilePath, (err, data) => {
+        if (err) {
+            throw err;
+        } else {
+            data.resize(Number(imagedata.width), Number(imagedata.height)).write(imagedata.tmpFilePath);
+        }
+    })
 };
 
-const saveResizedImage = (file: File) => { };
+const saveImage = async(imagedata: ImageData) => {
+
+
+
+
+    
+}

@@ -1,6 +1,5 @@
 import { defineComponent, onErrorCaptured, reactive, ref } from "vue";
 import { ErrorModal } from "@/components/index";
-import { setupMaster } from "cluster";
 
 export default defineComponent({
     name: "App",
@@ -18,7 +17,6 @@ export default defineComponent({
         //エラーハンドラー
         onErrorCaptured((err, vm, info) => {
             modal.value = true;
-            console.log("Appキャッチ" + modal);
             return true;
         });
         return { modal, closeErrorModal };

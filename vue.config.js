@@ -13,7 +13,9 @@ module.exports = {
                         }
                     ]
                 }
-            }
+            },
+            nodeIntegration:true,
+            nodemodulesPath:['./node_modules']
         }
     }
 };

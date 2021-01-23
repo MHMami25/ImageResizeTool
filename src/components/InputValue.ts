@@ -29,6 +29,6 @@ import {
       onErrorCaptured((err, vm, info) => {
         return true;
       });
-      return { size, filelength };
+      return { size, filelength, doResize };
     },
   });
