@@ -13,12 +13,13 @@
 
 <script lang="ts">
 import { defineComponent, onErrorCaptured, reactive, ref } from "vue";
+import FileListInterface from "@/common/class/FileListInterface";
 
 export default defineComponent({
   name: "Image",
   setup(props, context) {
     let isEnter = ref(false);
-    let files: FileList;
+    let files: FileListInterface = new FileListInterface();
 
     const dragEnter = () => {
       console.log("Enter Drop Area");
@@ -30,10 +31,8 @@ export default defineComponent({
     };
 
     const dropFile = (event: any) => {
-      throw new Error("エラーを発生させた");
-
-      files = event.dataTransfer.files;
-      context.emit("getFileEvent", files);
+      files.setFileList(event.dataTransfer.files);
+      context.emit("getFileEvent", files.getFileList());
       isEnter.value = false;
     };
 

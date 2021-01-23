@@ -14,19 +14,19 @@ import imageCompression from "browser-image-compression";
 import fs from "fs";
 import ImageData from "@/common/interface/ImageData";
 import Size from "@/common/interface/Size";
-import { ErrorModal, Image, InputValue } from "@/components/index";
+import { Image, InputValue } from "@/components/index";
+import FileListInterface from "@/common/class/FileListInterface";
 
 export default defineComponent({
   name: "Body",
   components: {
-    ErrorModal,
     Image,
     InputValue,
   },
 
   setup(prop, context) {
     let imagedata: ImageData = reactive({
-      files: new FileList(),
+      files: new FileListInterface(),
       width: 0,
       height: 0,
     });
@@ -35,7 +35,7 @@ export default defineComponent({
 
     //Image→Body:ファイルリストを取得
     const getFiles = (files: FileList) => {
-      imagedata.files = files;
+      imagedata.files.setFileList(files);
     };
     //Body→InputValue:ファイルリストの長さを送信
     const sendFileLength = () => {
