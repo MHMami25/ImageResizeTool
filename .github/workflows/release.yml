@@ -3,7 +3,7 @@ name: Build Release Electron
 on: 
  push:
   tags:
-  - '*v'
+  - 'v*'
 
 jobs:
   build:
