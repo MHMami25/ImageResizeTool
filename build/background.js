@@ -32,6 +32,7 @@ const electron_1 = require("electron");
 const lib_1 = require("vue-cli-plugin-electron-builder/lib");
 const electron_devtools_installer_1 = __importStar(require("electron-devtools-installer"));
 const isDevelopment = process.env.NODE_ENV !== 'production';
+let win;
 // Scheme must be registered before the app is ready
 electron_1.protocol.registerSchemesAsPrivileged([
     { scheme: 'app', privileges: { secure: true, standard: true } }
@@ -45,8 +46,8 @@ function createWindow() {
             webPreferences: {
                 // Use pluginOptions.nodeIntegration, leave this alone
                 // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-                nodeIntegration: process.env
-                    .ELECTRON_NODE_INTEGRATION
+                contextIsolation: false,
+                nodeIntegration: true
             }
         });
         if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -90,6 +91,9 @@ electron_1.app.on('ready', () => __awaiter(void 0, void 0, void 0, function* () 
         }
     }
     createWindow();
+    win.webContents.on('did-finish-load', () => {
+        win.webContents.send('sendPath', electron_1.app.getPath('userData'));
+    });
 }));
 if (isDevelopment) {
     if (process.platform === 'win32') {
