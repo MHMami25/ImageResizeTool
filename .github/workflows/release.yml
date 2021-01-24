@@ -10,7 +10,7 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     env:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      GH_TOKEN: ${{ secrets.MYGITHUB_TOKEN }}
     strategy:
       matrix:
         os: [windows-latest]
@@ -37,6 +37,8 @@ jobs:
         if: matrix.os == 'windows-latest'
         run: |
           yarn run electron:build
+        env:
+          GH_TOKEN: ${{ secrets.MYGITHUB_TOKEN }}
       - name: Upload Artifacts for Windows Zip
         if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v2
@@ -58,4 +60,4 @@ jobs:
             dist_electron/*.zip
             dist_electron/*.exe
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.MYGITHUB_TOKEN }}
