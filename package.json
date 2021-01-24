@@ -44,6 +44,7 @@
     "vue-property-decorator": "^9.1.2",
     "webpack": "^4.46.0"
   },
+
   "bugs": {
     "url": "https://github.com/mi3na7ta3/ImageResizeTool/issues"
   },

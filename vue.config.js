@@ -5,17 +5,17 @@ module.exports = {
                 productName: "ImageResizeTool",
                 appId: "com.sample.myapplication",
                 win: {
-                    //icon: "public/app.ico",
+                    icon: "src/asset/app.ico",
                     target: [
                         {
-                            target: ['zip', 'nsis', 'portable'],
+                            target: 'portable',
                             arch: ['x64']
                         }
                     ]
                 }
             },
-            nodeIntegration:true,
-            nodemodulesPath:['./node_modules']
+            nodeIntegration: true,
+            nodemodulesPath: ['./node_modules']
         }
     }
 };
