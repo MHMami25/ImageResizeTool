@@ -35,7 +35,7 @@ jobs:
       - name: Build for Windows
         if: matrix.os == 'windows-latest'
         run: |
-          yarn run electron:build(Win) --windows nsis zip --x64
+          yarn run electron:build --windows nsis zip --x64
       - name: Upload Artifacts for Windows Zip
         if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v2
