@@ -17,8 +17,8 @@ import {
     },
     setup(props, context) {
       let size: Size = {
-        width: 0,
-        height: 0,
+        width: 200,
+        height: 200,
       };
       const { filelength } = toRefs(props);
   

@@ -2,9 +2,7 @@
   <transition name="modal" appear>
     <div class="modal modal-overlay" @click.self="closeErrorModal">
       <div class="modal-window">
-        <div class="modal-content">
-          <slot/>
-        </div>
+        <div class="modal-content"><slot/></div>
         <footer class="modal-footer">
           <slot name="footer">
             <button @click="closeErrorModal">Close</button>

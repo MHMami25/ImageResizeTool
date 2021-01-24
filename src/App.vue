@@ -4,7 +4,7 @@
     <router-view />
     <ErrorModal @closeErrorModalEvent="closeErrorModal" v-if="modal">
       <p>Vue.js Modal Window!</p>
-      <div><input v-model="message" /></div>
+      {{ message }}
       <!-- /default -->
       <!-- footer スロットコンテンツ -->
     </ErrorModal>

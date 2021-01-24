@@ -1,6 +1,5 @@
-import { defineComponent, onErrorCaptured, reactive, ref } from "vue";
+import { defineComponent, onErrorCaptured, ref } from "vue";
 import FileListInterface from "@/common/class/FileListInterface";
-import { exception } from "console";
 
 export default defineComponent({
   name: "Image",

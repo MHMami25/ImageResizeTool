@@ -1,5 +1,5 @@
 import { defineComponent, onErrorCaptured, reactive, ref } from "vue";
-import imageCompression from "browser-image-compression";
+import { BrowserWindow, dialog } from "electron";
 import fs from "fs";
 import Jimp from "jimp";
 import ImageData from "@/common/interface/ImageData";
@@ -81,10 +81,20 @@ const doResizeImage = async (imagedata: ImageData) => {
     })
 };
 
-const saveImage = async(imagedata: ImageData) => {
+const saveImage = async (imagedata: ImageData) => {
+
+    dialog.showSaveDialog(
+        BrowserWindow.getAllWindows()[0],
+        {
+            title: "title",
+            filters: [
+                {
+                    name: 'Documents',
+                    extensions: ['jpg', 'png', 'bmp']
+                }
+            ]
+        }
+    )
 
 
-
-
-    
 }

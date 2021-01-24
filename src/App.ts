@@ -9,6 +9,7 @@ export default defineComponent({
 
     setup(prop, context) {
         let modal = ref(false);
+        let message = ref("");
 
         const closeErrorModal = (() => {
             modal.value = false;
@@ -17,8 +18,9 @@ export default defineComponent({
         //エラーハンドラー
         onErrorCaptured((err, vm, info) => {
             modal.value = true;
-            return true;
+            message.value = "だめです";
+            return false;
         });
-        return { modal, closeErrorModal };
+        return { modal, message, closeErrorModal };
     },
 });
