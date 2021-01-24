@@ -2,12 +2,11 @@
   <transition name="modal" appear>
     <div class="modal modal-overlay" @click.self="closeErrorModal">
       <div class="modal-window">
-        <div class="modal-content"><slot/></div>
-        <footer class="modal-footer">
-          <slot name="footer">
-            <button @click="closeErrorModal">Close</button>
-          </slot>
-        </footer>
+        <div class="modal-content">
+          {{ errormessage }}
+          {{ errorinfo }}
+        </div>
+        <button @click="closeErrorModal">Close</button>
       </div>
     </div>
   </transition>
@@ -33,6 +32,8 @@
   &-window {
     background: #fff;
     border-radius: 4px;
+    width: 40%;
+    height: 20%;
     overflow: hidden;
   }
 

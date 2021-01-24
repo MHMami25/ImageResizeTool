@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <router-link to="/">home</router-link>
     <router-view />
-    <ErrorModal @closeErrorModalEvent="closeErrorModal" v-if="modal">
-      <p>Vue.js Modal Window!</p>
-      {{ message }}
-      <!-- /default -->
-      <!-- footer スロットコンテンツ -->
+    <ErrorModal
+      @closeErrorModalEvent="closeErrorModal"
+      v-if="modal"
+      :errormessage="message"
+      :errorinfo="infomation"
+    >
     </ErrorModal>
   </div>
 </template>

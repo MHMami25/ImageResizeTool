@@ -3,16 +3,17 @@ import { defineComponent, toRef } from "vue";
 export default defineComponent({
     name: "ErroeModal",
     props: {
-        errormessage: String
+        errormessage: String,
+        errorinfo: String
     },
 
     setup(props, context) {
 
-        let errormessage = props;
+        let { errormessage, errorinfo } = props;
 
         const closeErrorModal = (() => {
             context.emit("closeErrorModalEvent");
         })
-        return { errormessage, closeErrorModal };
+        return { errormessage, errorinfo, closeErrorModal };
     }
 })

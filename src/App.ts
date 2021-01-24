@@ -10,6 +10,7 @@ export default defineComponent({
     setup(prop, context) {
         let modal = ref(false);
         let message = ref("");
+        let infomation = ref("");
 
         const closeErrorModal = (() => {
             modal.value = false;
@@ -19,8 +20,10 @@ export default defineComponent({
         onErrorCaptured((err, vm, info) => {
             modal.value = true;
             message.value = "だめです";
+            infomation.value = info;
+
             return false;
         });
-        return { modal, message, closeErrorModal };
+        return { modal, message, infomation, closeErrorModal };
     },
 });

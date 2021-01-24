@@ -1,11 +1,10 @@
 import { defineComponent, onErrorCaptured, reactive, ref } from "vue";
-import { BrowserWindow, dialog } from "electron";
+import path from "path";
 import fs from "fs";
 import Jimp from "jimp";
 import ImageData from "@/common/interface/ImageData";
 import Size from "@/common/interface/Size";
 import FileListInterface from "@/common/class/FileListInterface";
-import DefineValueObject from '@/common/lib/DefineValueObject'
 import { Image, InputValue } from "@/components/index";
 
 export default defineComponent({
@@ -19,7 +18,7 @@ export default defineComponent({
         let imagedata: ImageData = reactive({
             files: new FileListInterface(),
             beforeFilePath: "",
-            tmpFilePath: "",
+            afterFilePath: "",
             width: 0,
             height: 0,
         });
@@ -30,6 +29,7 @@ export default defineComponent({
         const getFiles = (files: FileList) => {
             imagedata.files.setFileList(files);
             imagedata.beforeFilePath = files[0].path;
+            imagedata.afterFilePath = createReName(files[0].path);
         };
         //Body→InputValue:ファイルリストの長さを送信
         const sendFileLength = () => {
@@ -44,11 +44,11 @@ export default defineComponent({
             imagedata.height = size.height;
 
             //一時フォルダ作成
-            imagedata.tmpFilePath = makeTmpDir();
+            //imagedata.tmpFilePath = makeTmpDir();
             //リサイズ処理へ
             await doResizeImage(imagedata);
             //画像を指定のフォルダに保存
-            await saveImage(imagedata);
+            //await saveImage(imagedata);
         };
 
         //エラーハンドラー
@@ -60,7 +60,8 @@ export default defineComponent({
     },
 });
 
-const makeTmpDir = () => {
+//次のバージョンまで保留
+/*const makeTmpDir = () => {
 
     //tmpディレクトリ作成
     if (!fs.existsSync(DefineValueObject.appPath + "/tmp")) {
@@ -68,7 +69,7 @@ const makeTmpDir = () => {
     }
 
     return DefineValueObject.appPath + "/tmp/" + DefineValueObject.tmpFileName + ".png";
-}
+}*/
 
 const doResizeImage = async (imagedata: ImageData) => {
 
@@ -76,25 +77,28 @@ const doResizeImage = async (imagedata: ImageData) => {
         if (err) {
             throw err;
         } else {
-            data.resize(Number(imagedata.width), Number(imagedata.height)).write(imagedata.tmpFilePath);
+            data.resize(Number(imagedata.width), Number(imagedata.height)).write(imagedata.afterFilePath);
         }
     })
 };
 
-const saveImage = async (imagedata: ImageData) => {
+//次のバージョンまで保留
+/*const saveImage = async (imagedata: ImageData) => {
 
-    dialog.showSaveDialog(
-        BrowserWindow.getAllWindows()[0],
-        {
-            title: "title",
-            filters: [
-                {
-                    name: 'Documents',
-                    extensions: ['jpg', 'png', 'bmp']
-                }
-            ]
-        }
-    )
+}*/
 
+const createReName = (filepath: string) => {
+    let dirname: string;
+    let beforefilename: string;
+    let format: string;
+    let afterfilename: string;
 
+    dirname = path.dirname(filepath);
+    format = path.extname(filepath);
+    beforefilename = path.basename(filepath, format);
+
+    //仮のリネーム+01足しただけ
+    afterfilename = beforefilename + "_01";
+
+    return path.resolve(dirname, afterfilename) + format;
 }
