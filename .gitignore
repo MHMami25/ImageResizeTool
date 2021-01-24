@@ -2,3 +2,5 @@
 /dist_electron
 /node_modules
 @bat_template
+.vscode
+.vscode/**/*
