@@ -1,6 +1,5 @@
 import { defineComponent, onErrorCaptured, reactive, ref } from "vue";
 import path from "path";
-import fs from "fs";
 import Jimp from "jimp";
 import ImageData from "@/common/interface/ImageData";
 import Size from "@/common/interface/Size";
@@ -32,23 +31,18 @@ export default defineComponent({
             imagedata.afterFilePath = createReName(files[0].path);
         };
         //Body→InputValue:ファイルリストの長さを送信
-        const sendFileLength = () => {
-            console.log(imagedata.files);
+        const sendFileLength = () => {            
             return imagedata.files.length;
         };
-        //
+
         const getResizeValue = async (size: Size) => {
 
             //格納画像データ
             imagedata.width = size.width;
             imagedata.height = size.height;
 
-            //一時フォルダ作成
-            //imagedata.tmpFilePath = makeTmpDir();
             //リサイズ処理へ
             await doResizeImage(imagedata);
-            //画像を指定のフォルダに保存
-            //await saveImage(imagedata);
         };
 
         //エラーハンドラー
@@ -60,17 +54,6 @@ export default defineComponent({
     },
 });
 
-//次のバージョンまで保留
-/*const makeTmpDir = () => {
-
-    //tmpディレクトリ作成
-    if (!fs.existsSync(DefineValueObject.appPath + "/tmp")) {
-        fs.mkdirSync(DefineValueObject.appPath + "/tmp");
-    }
-
-    return DefineValueObject.appPath + "/tmp/" + DefineValueObject.tmpFileName + ".png";
-}*/
-
 const doResizeImage = async (imagedata: ImageData) => {
 
     Jimp.read(imagedata.beforeFilePath, (err, data) => {
@@ -81,11 +64,6 @@ const doResizeImage = async (imagedata: ImageData) => {
         }
     })
 };
-
-//次のバージョンまで保留
-/*const saveImage = async (imagedata: ImageData) => {
-
-}*/
 
 const createReName = (filepath: string) => {
     let dirname: string;
