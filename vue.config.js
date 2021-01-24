@@ -14,12 +14,16 @@ module.exports = {
                         {
                             target: 'portable',
                             arch: ['x64']
-                        }, 
+                        },
                         {
                             target: 'nsis',
                             arch: ['x64']
                         }
                     ]
+                },
+                nsis: {
+                    oneClick: false,
+                    allowToChangeInstallationDirectory: true
                 }
             },
             nodeIntegration: true,
