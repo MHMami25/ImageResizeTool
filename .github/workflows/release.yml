@@ -32,7 +32,7 @@ jobs:
       - name: Install Vue CLI
         run: |
           yarn global add @vue/cli
-      - name: Add vue electron-builder
+      - name: Build for Windows
         if: matrix.os == 'windows-latest'
         run: |
           yarn run electron:build
