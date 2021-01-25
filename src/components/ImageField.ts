@@ -2,7 +2,7 @@ import { defineComponent, onErrorCaptured, ref } from "vue";
 import FileListInterface from "@/common/class/FileListInterface";
 
 export default defineComponent({
-  name: "Image",
+  name: "ImageField",
   setup(props, context) {
     let isEnter = ref(false);
     let files: FileListInterface = new FileListInterface();

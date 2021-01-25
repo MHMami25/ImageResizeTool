@@ -1,8 +1,8 @@
 <template>
   <div class="body">
-    <Image @getFileEvent="getFiles"></Image>
+    <ImageField @getFileEvent="getFiles"></ImageField>
     <InputValue
-      :filelength="sendFileLength"
+      :imagedatavalue="sentImageData"
       @getResizeEvent="getResizeValue"
     ></InputValue>
   </div>

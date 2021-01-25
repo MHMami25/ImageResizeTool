@@ -1,3 +1,4 @@
+import Size from '@/common/interface/Size'
 import FileListInterface from '@/common/class/FileListInterface'
 export default interface ImageData {
     files: FileListInterface;
@@ -5,4 +6,6 @@ export default interface ImageData {
     afterFilePath: string;
     width: number;
     height: number;
+    //入力値のsize
+    inputsize: Size;
 }

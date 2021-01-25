@@ -1,7 +1,7 @@
 <template>
-  <div id="image">
+  <div id="imagefield">
     <div
-      class="image-drop-area"
+      class="imagefield-drop-area"
       @dragenter="dragEnter"
       @dragleave="dragLeave"
       @dragover.prevent
@@ -11,10 +11,10 @@
   </div>
 </template>
 
-<script lang="ts" src="./Image.ts"></script>
+<script lang="ts" src="./ImageField.ts"></script>
 
 <style lang="scss">
-.image-drop-area {
+.imagefield-drop-area {
   color: gray;
   font-weight: bold;
   font-size: 1.2em;

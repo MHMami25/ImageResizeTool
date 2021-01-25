@@ -5,12 +5,12 @@ import Jimp from "jimp";
 import ImageData from "@/common/interface/ImageData";
 import Size from "@/common/interface/Size";
 import FileListInterface from "@/common/class/FileListInterface";
-import { Image, InputValue } from "@/components/index";
+import { ImageField, InputValue } from "@/components/index";
 
 export default defineComponent({
     name: "Body",
     components: {
-        Image,
+        ImageField,
         InputValue,
     },
 
@@ -21,27 +21,37 @@ export default defineComponent({
             afterFilePath: "",
             width: 0,
             height: 0,
+            inputsize: {
+                width: 0,
+                height: 0,
+                percent: 0
+            }
         });
 
-        let modal = ref(false);
-
         //Image→Body:ファイルリストを取得
-        const getFiles = (files: FileList) => {
+        const getFiles = async (files: FileList) => {
             imagedata.files.setFileList(files);
+
+            //取得ファイルのサイズを取得
+            let image = new Image();
+            image.src = URL.createObjectURL(files[0]);
+            imagedata = await getImageSize(imagedata, image);
+
             imagedata.beforeFilePath = files[0].path;
             imagedata.afterFilePath = createReName(files[0].path);
         };
-        //Body→InputValue:ファイルリストの長さを送信
-        const sendFileLength = () => {
-            console.log(imagedata.files);
-            return imagedata.files.length;
-        };
+
+        //Body→InputValue:画像のサイズを送信
+        const sentImageData = () => {
+            return imagedata;
+        }
+
         //
         const getResizeValue = async (size: Size) => {
 
-            //格納画像データ
-            imagedata.width = size.width;
-            imagedata.height = size.height;
+            //入力値データ
+            imagedata.inputsize.width = size.width;
+            imagedata.inputsize.height = size.height;
 
             //一時フォルダ作成
             //imagedata.tmpFilePath = makeTmpDir();
@@ -56,7 +66,7 @@ export default defineComponent({
             return true;
         });
 
-        return { getFiles, sendFileLength, getResizeValue };
+        return { getFiles, sentImageData, getResizeValue };
     },
 });
 
@@ -70,6 +80,13 @@ export default defineComponent({
 
     return DefineValueObject.appPath + "/tmp/" + DefineValueObject.tmpFileName + ".png";
 }*/
+
+const getImageSize = async (imagedata: ImageData, image: HTMLImageElement) => {
+    imagedata.width = image.naturalWidth;
+    imagedata.height = image.naturalHeight;
+
+    return imagedata;
+}
 
 const doResizeImage = async (imagedata: ImageData) => {
 
