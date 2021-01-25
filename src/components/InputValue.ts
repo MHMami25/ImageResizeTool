@@ -5,8 +5,7 @@ import {
   ref,
   toRefs
 } from "vue";
-import Size from "@/common/interface/Size";
-import ImageData from "@/common/interface/ImageData"
+import { Size, ImageData } from "@/common/interface/index"
 
 
 export default defineComponent({

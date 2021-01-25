@@ -2,9 +2,8 @@ import { defineComponent, onErrorCaptured, reactive, ref } from "vue";
 import path from "path";
 import fs from "fs";
 import Jimp from "jimp";
-import ImageData from "@/common/interface/ImageData";
-import Size from "@/common/interface/Size";
-import FileListInterface from "@/common/class/FileListInterface";
+import { FileListInterface } from "@/common/class/index";
+import { Size, ImageData } from "@/common/interface/index";
 import { ImageField, InputValue } from "@/components/index";
 
 export default defineComponent({

@@ -1,5 +1,5 @@
 import { defineComponent, onErrorCaptured, ref } from "vue";
-import FileListInterface from "@/common/class/FileListInterface";
+import { FileListInterface } from "@/common/class/index";
 
 export default defineComponent({
   name: "ImageField",
