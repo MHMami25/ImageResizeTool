@@ -24,9 +24,7 @@
         v-model="size.percent"
       />
     </div>
-    <div v-show="filelength">
       <button class="inputvalue-button" @click="doResize">リサイズ</button>
-    </div>
   </div>
 </template>
 

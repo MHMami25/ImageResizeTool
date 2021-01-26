@@ -33,15 +33,18 @@ export default defineComponent({
 
             //取得ファイルのサイズを取得
             let image = new Image();
-            image.src = URL.createObjectURL(files[0]);
+            image.src = files[0].path;
             imagedata = await getImageSize(imagedata, image);
 
             imagedata.beforeFilePath = files[0].path;
             imagedata.afterFilePath = createReName(files[0].path);
+
+            await sendImageData();
         };
 
         //Body→InputValue:画像のサイズを送信
-        const sentImageData = () => {
+        const sendImageData = async() => {
+            console.log("inputvalueへ")
             return imagedata;
         }
 
@@ -65,7 +68,7 @@ export default defineComponent({
             return true;
         });
 
-        return { getFiles, sentImageData, getResizeValue };
+        return { imagedata, getFiles, sendImageData, getResizeValue };
     },
 });
 
