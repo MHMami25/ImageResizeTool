@@ -2,7 +2,7 @@
   <div class="body">
     <ImageField @getFileEvent="getFiles"></ImageField>
     <InputValue
-      :imagedata="sendImageData"
+      :imagedatavalue="imagedata"
       @getResizeEvent="getResizeValue"
     ></InputValue>
   </div>

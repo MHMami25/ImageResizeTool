@@ -1,4 +1,4 @@
-import { defineComponent, onErrorCaptured, reactive, ref } from "vue";
+import { defineComponent, onErrorCaptured, onMounted, reactive, ref } from "vue";
 import path from "path";
 import fs from "fs";
 import Jimp from "jimp";
@@ -28,25 +28,20 @@ export default defineComponent({
         });
 
         //Image→Body:ファイルリストを取得
-        const getFiles = async (files: FileList) => {
+        const getFiles = (files: FileList) => {
             imagedata.files.setFileList(files);
 
             //取得ファイルのサイズを取得
             let image = new Image();
             image.src = files[0].path;
-            imagedata = await getImageSize(imagedata, image);
+            image.addEventListener('load', (e) => {
+                imagedata = getImageSize(imagedata, image);
 
-            imagedata.beforeFilePath = files[0].path;
-            imagedata.afterFilePath = createReName(files[0].path);
+                imagedata.beforeFilePath = files[0].path;
+                imagedata.afterFilePath = createReName(files[0].path);
 
-            await sendImageData();
+            }, false)
         };
-
-        //Body→InputValue:画像のサイズを送信
-        const sendImageData = async() => {
-            console.log("inputvalueへ")
-            return imagedata;
-        }
 
         //
         const getResizeValue = async (size: Size) => {
@@ -54,7 +49,7 @@ export default defineComponent({
             //入力値データ
             imagedata.inputsize.width = size.width;
             imagedata.inputsize.height = size.height;
-
+            console.log("imagedata" + imagedata);
             //一時フォルダ作成
             //imagedata.tmpFilePath = makeTmpDir();
             //リサイズ処理へ
@@ -68,7 +63,7 @@ export default defineComponent({
             return true;
         });
 
-        return { imagedata, getFiles, sendImageData, getResizeValue };
+        return { imagedata, getFiles, getResizeValue };
     },
 });
 
@@ -83,7 +78,7 @@ export default defineComponent({
     return DefineValueObject.appPath + "/tmp/" + DefineValueObject.tmpFileName + ".png";
 }*/
 
-const getImageSize = async (imagedata: ImageData, image: HTMLImageElement) => {
+const getImageSize = (imagedata: ImageData, image: HTMLImageElement) => {
     imagedata.width = image.naturalWidth;
     imagedata.height = image.naturalHeight;
 

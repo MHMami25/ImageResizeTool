@@ -45,6 +45,13 @@
     "webpack": "^4.46.0"
   },
 
+  "files": [
+    "src/**/*",
+    "src",
+    "public",
+    "node_modules"
+  ],
+
   "bugs": {
     "url": "https://github.com/mi3na7ta3/ImageResizeTool/issues"
   },
