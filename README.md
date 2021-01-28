@@ -8,11 +8,11 @@
 [リリース](https://github.com/mi3na7ta3/ImageResizeTool/releases)からダウンロードして下さい。
 
 - 種類
-  - .zip
+  - .zip： 
     インストール不要で使用できます。展開してから使用して下さい。
-  - .exe
+  - .exe： 
     実行ファイルです。このまま実行して使用出来ます。
-  - Setup(xx-xx-xx).exe
+  - Setup(xx-xx-xx).exe： 
     インストーラです。インストールしてツールを使用するタイプです。
   
   
