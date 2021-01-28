@@ -1,6 +1,5 @@
 import { defineComponent, onErrorCaptured, onMounted, reactive, ref } from "vue";
 import path from "path";
-import fs from "fs";
 import Jimp from "jimp";
 import { FileListInterface } from "@/common/class/index";
 import { Size, ImageData } from "@/common/interface/index";
@@ -54,8 +53,6 @@ export default defineComponent({
             //imagedata.tmpFilePath = makeTmpDir();
             //リサイズ処理へ
             await doResizeImage(imagedata);
-            //画像を指定のフォルダに保存
-            //await saveImage(imagedata);
         };
 
         //エラーハンドラー
@@ -95,11 +92,6 @@ const doResizeImage = async (imagedata: ImageData) => {
         }
     })
 };
-
-//次のバージョンまで保留
-/*const saveImage = async (imagedata: ImageData) => {
-
-}*/
 
 const createReName = (filepath: string) => {
     let dirname: string;

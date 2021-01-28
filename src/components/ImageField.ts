@@ -8,7 +8,6 @@ export default defineComponent({
     let files: FileListInterface = new FileListInterface();
 
     const dragEnter = () => {
-      console.log("Enter Drop Area");
       isEnter.value = true;
     };
 
