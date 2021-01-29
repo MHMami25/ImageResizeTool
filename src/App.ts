@@ -1,5 +1,6 @@
 import { defineComponent, onErrorCaptured, reactive, ref } from "vue";
 import { ErrorModal } from "@/components/index";
+import DefineValueObject from "./common/lib/DefineValueObject";
 
 export default defineComponent({
     name: "App",
@@ -8,6 +9,7 @@ export default defineComponent({
     },
 
     setup(prop, context) {
+
         let modal = ref(false);
         let message = ref("");
         let infomation = ref("");

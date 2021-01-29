@@ -54,5 +54,8 @@
 
 <script lang="ts" src="./InputValue.ts"></script>
 
-<style lang="scss">
+<style lang="sass">
+#inputvalue
+  width: 100%
+  height: 40%
 </style>

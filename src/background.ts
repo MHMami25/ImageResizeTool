@@ -6,6 +6,10 @@ import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 let win: BrowserWindow;
+enum WindowSize {
+  CONST_WINDOW_WIDTH = 560,
+  CONST_WINDOW_HEIGHT = 520
+};
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -15,8 +19,8 @@ protocol.registerSchemesAsPrivileged([
 async function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 560,
-    height: 520,
+    width: WindowSize.CONST_WINDOW_WIDTH,
+    height: WindowSize.CONST_WINDOW_HEIGHT,
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
@@ -69,7 +73,9 @@ app.on('ready', async () => {
 
   win.webContents.on('did-finish-load', () => {
     win.webContents.send('sendPath', app.getPath('userData'));
+    win.webContents.send('sendWindowSize', WindowSize)
   });
+
 })
 
 app.whenReady().then(() => {
