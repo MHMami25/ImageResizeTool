@@ -9,6 +9,11 @@ export default defineComponent({
     },
 
     setup(prop, context) {
+        //スタイル設定
+        let style = {
+            width: DefineValueObject.window_width,
+            height: DefineValueObject.window_height
+        }
 
         let modal = ref(false);
         let message = ref("");
@@ -26,6 +31,6 @@ export default defineComponent({
 
             return false;
         });
-        return { modal, message, infomation, closeErrorModal };
+        return { style, modal, message, infomation, closeErrorModal };
     },
 });

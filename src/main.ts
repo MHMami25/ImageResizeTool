@@ -9,9 +9,11 @@ electron.ipcRenderer.on('sendPath', (event, Path) => {
 })
 
 electron.ipcRenderer.on('sendWindowSize', (event, Size) => {
-    DefineValueObject.window_width = Size.CONST_WINDOW_WIDTH
-    DefineValueObject.window_height = Size.CONST_WINDOW_HEIGHT
+    DefineValueObject.window_width = Size.CONST_WINDOW_WIDTH + "px"
+    DefineValueObject.window_height = Size.CONST_WINDOW_HEIGHT + "px"
+
+    //幅、高さを受け取ってから表示
+    let app = createApp(App);
+    app.use(router).mount('#app')
 })
 
-let app = createApp(App);
-app.use(router).mount('#app')
