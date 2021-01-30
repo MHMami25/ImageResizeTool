@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :style="style">
+  <div id="app">
     <router-view />
     <ErrorModal
       @closeErrorModalEvent="closeErrorModal"
@@ -19,9 +19,10 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  #body{
-    width: 100%;
-    height: 100%;
-  }
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

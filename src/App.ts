@@ -1,6 +1,5 @@
 import { defineComponent, onErrorCaptured, reactive, ref } from "vue";
 import { ErrorModal } from "@/components/index";
-import DefineValueObject from "./common/lib/DefineValueObject";
 
 export default defineComponent({
     name: "App",
@@ -9,12 +8,6 @@ export default defineComponent({
     },
 
     setup(prop, context) {
-        //スタイル設定
-        let style = {
-            width: DefineValueObject.window_width + "px",
-            height: DefineValueObject.window_height + "px"
-        }
-
         let modal = ref(false);
         let message = ref("");
         let infomation = ref("");
@@ -31,6 +24,6 @@ export default defineComponent({
 
             return false;
         });
-        return { style, modal, message, infomation, closeErrorModal };
+        return { modal, message, infomation, closeErrorModal };
     },
 });

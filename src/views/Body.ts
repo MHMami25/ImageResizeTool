@@ -3,6 +3,7 @@ import path from "path";
 import Jimp from "jimp";
 import { FileListInterface } from "@/common/class/index";
 import { Size, ImageData } from "@/common/interface/index";
+import DefineValueObject from "@/common/lib/DefineValueObject";
 import { ImageField, InputValue } from "@/components/index";
 
 export default defineComponent({
@@ -13,6 +14,12 @@ export default defineComponent({
     },
 
     setup(prop, context) {
+        //スタイル設定
+        let style = {
+            width: DefineValueObject.window_width * 0.8 + "px",
+            height: DefineValueObject.window_height * 0.9 + "px"
+        }
+
         let imagedata: ImageData = reactive({
             files: new FileListInterface(),
             beforeFilePath: "",
@@ -60,7 +67,7 @@ export default defineComponent({
             return true;
         });
 
-        return { imagedata, getFiles, getResizeValue };
+        return { style, imagedata, getFiles, getResizeValue };
     },
 });
 

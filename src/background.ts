@@ -21,13 +21,15 @@ async function createWindow() {
   win = new BrowserWindow({
     width: WindowSize.CONST_WINDOW_WIDTH,
     height: WindowSize.CONST_WINDOW_HEIGHT,
+    useContentSize: true,
+    darkTheme: true,
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       contextIsolation: false,
       nodeIntegration: true,
 
-      webSecurity: false//process.env.NODE_ENV !== 'development'
+      webSecurity: process.env.NODE_ENV !== 'development'
     }
   })
 
