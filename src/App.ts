@@ -18,7 +18,6 @@ export default defineComponent({
 
         //エラーハンドラー
         onErrorCaptured((err, vm, info) => {
-            console.log("app");
             modal.value = true;
             message.value = "だめです";
             infomation.value = info;
