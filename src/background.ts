@@ -7,8 +7,8 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 
 let win: BrowserWindow;
 enum WindowSize {
-  CONST_WINDOW_WIDTH = 560,
-  CONST_WINDOW_HEIGHT = 520
+  CONST_WINDOW_WIDTH = 600,
+  CONST_WINDOW_HEIGHT = 560
 };
 
 // Scheme must be registered before the app is ready

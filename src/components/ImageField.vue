@@ -16,7 +16,7 @@
 <style lang="scss">
 #imagefield {
   width: 100%;
-  height: 60%;
+  height: 70%;
   display: flex;
   align-items: center;
   justify-content: center;

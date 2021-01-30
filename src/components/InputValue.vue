@@ -67,44 +67,43 @@
 <style lang="scss">
 #inputvalue {
   width: 100%;
-  height: 40%;
+  height: 30%;
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
 }
 
 .inputvalue-inputarea {
-  margin-left: 5%;
+ // margin-left: 5%;
   display: flex;
   flex-direction: column;
   align-content: center;
-}
 
+  .inputvalue-checkobx-label {
+    font-size: 12px;
+    margin-right: 15px;
+  }
 
-.inputvalue-checkobx-label {
-  font-size: 12px;
-  margin-right: 15px;
-}
+  .inputvalue-label {
+    font-size: 15px;
+  }
 
-.inputvalue-label {
-  font-size: 15px;
-}
-
-.inputvalue-form {
-  width: 80px;
-  height: 15px;
-  margin-right: 10px;
+  .inputvalue-form {
+    width: 80px;
+    height: 15px;
+    margin-right: 10px;
+  }
 }
 
 .inputvalue-buttonarea {
-  margin-right: 5%;
+ // margin-right: 5%;
   display: flex;
   flex-wrap: wrap;
   align-content: center;
-}
 
-.inputvalue-button {
-  width: 80px;
-  height: 20px;
+  .inputvalue-button {
+    width: 80px;
+    height: 20px;
+  }
 }
 </style>

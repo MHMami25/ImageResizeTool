@@ -1,5 +1,5 @@
 <template>
-  <div class="body">
+  <div id="body">
     <ImageField @getFileEvent="getFiles"></ImageField>
     <InputValue
       :imagedatavalue="imagedata"

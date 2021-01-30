@@ -11,8 +11,8 @@ export default defineComponent({
     setup(prop, context) {
         //スタイル設定
         let style = {
-            width: DefineValueObject.window_width,
-            height: DefineValueObject.window_height
+            width: DefineValueObject.window_width + "px",
+            height: DefineValueObject.window_height + "px"
         }
 
         let modal = ref(false);
