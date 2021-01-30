@@ -4,4 +4,4 @@
 @bat_template
 .vscode
 .vscode/**/*
-ImageResizeTool.code-workspace
+*.code-workspace
