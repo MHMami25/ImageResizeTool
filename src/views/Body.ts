@@ -1,9 +1,10 @@
 import { defineComponent, onErrorCaptured, onMounted, reactive, ref } from "vue";
 import path from "path";
 import Jimp from "jimp";
+import moment from "moment";
 import { FileListInterface } from "@/common/class/index";
 import { Size, ImageData } from "@/common/interface/index";
-import DefineValueObject from "@/common/lib/DefineValueObject";
+import { DefineValueObject } from "@/common/lib/index";
 import { ImageField, InputValue } from "@/components/index";
 
 export default defineComponent({
@@ -51,7 +52,6 @@ export default defineComponent({
 
         //
         const getResizeValue = async (size: Size) => {
-
             //入力値データ
             imagedata.inputsize.width = size.width;
             imagedata.inputsize.height = size.height;
@@ -60,6 +60,7 @@ export default defineComponent({
             //imagedata.tmpFilePath = makeTmpDir();
             //リサイズ処理へ
             await doResizeImage(imagedata);
+
         };
 
         //エラーハンドラー
@@ -91,16 +92,22 @@ const getImageSize = (imagedata: ImageData, image: HTMLImageElement) => {
 
 const doResizeImage = async (imagedata: ImageData) => {
 
-    Jimp.read(imagedata.beforeFilePath, (err, data) => {
-        if (err) {
-            throw err;
-        } else {
-            data.resize(Number(imagedata.width), Number(imagedata.height)).write(imagedata.afterFilePath);
-        }
-    })
+    try {
+        Jimp.read(imagedata.beforeFilePath, (err, data) => {
+            if (err) {
+                throw err;
+            } else {
+                data.resize(Number(imagedata.width), Number(imagedata.height)).write(imagedata.afterFilePath);
+            }
+        })
+    } catch (err) {
+        throw err;
+    }
 };
 
 const createReName = (filepath: string) => {
+    let date = moment();
+
     let dirname: string;
     let beforefilename: string;
     let format: string;

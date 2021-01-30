@@ -2,7 +2,7 @@
   "name": "ImageResizeTool",
   "version": "1.0.0-beta2",
   "description": "",
-  "author": "mi3na7ta3",
+  "author": "Mami C.",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "start": "tsc -p tsconfig.json && electron .",
@@ -18,6 +18,7 @@
     "fs": "0.0.1-security",
     "install": "^0.13.0",
     "jimp": "^0.16.1",
+    "moment": "^2.29.1",
     "sass-loader": "^10.1.1",
     "vue": "^3.0.0",
     "vue-class-component": "^7.2.6",
@@ -44,21 +45,19 @@
     "vue-property-decorator": "^9.1.2",
     "webpack": "^4.46.0"
   },
-
   "files": [
     "src/**/*",
     "src",
     "public",
     "node_modules"
   ],
-
   "bugs": {
-    "url": "https://github.com/mi3na7ta3/ImageResizeTool/issues"
+    "url": "https://github.com/MHMami25/ImageResizeTool/issues"
   },
-  "homepage": "https://github.com/mi3na7ta3/ImageResizeTool#readme",
+  "homepage": "https://github.com/MHMami25/ImageResizeTool#readme",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mi3na7ta3/ImageResizeTool.git"
+    "url": "git+https://github.com/MHMami25/ImageResizeTool.git"
   }
 }
