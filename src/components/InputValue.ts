@@ -7,6 +7,10 @@ import {
 } from "vue";
 import { Size, ImageData } from "@/common/interface/index"
 
+enum WINDOWSIZE {
+  WIDTH = "width",
+  HEIGHT = "height"
+}
 
 export default defineComponent({
   name: "InputValue",
@@ -16,9 +20,9 @@ export default defineComponent({
 
   setup(props, context) {
     let size: Size = reactive({
-      width: 200,
-      height: 200,
-      percent: 50
+      width: 0,
+      height: 0,
+      percent: 0
     });
     let sizeratiochecked = ref(false);
     let percentusechecked = ref(false);
@@ -38,14 +42,14 @@ export default defineComponent({
     //幅の入力値が変更された際に実行する処理
     const changeInputWidthValue = () => {
       if (sizeratiochecked.value) {
-        size = changeSizeValue(size, props.imagedatavalue, "width");
+        size = changeSizeValue(size, props.imagedatavalue, WINDOWSIZE.WIDTH);
       }
     }
 
     //高さの入力値が変更された際に実行する処理
     const changeInputHeightValue = () => {
       if (sizeratiochecked.value) {
-        size = changeSizeValue(size, props.imagedatavalue, "height");
+        size = changeSizeValue(size, props.imagedatavalue, WINDOWSIZE.HEIGHT);
       }
     }
 
@@ -86,16 +90,16 @@ const changeSizeValue = (size: Size, imagedatavalue: ImageData | undefined, str:
 
   let calcratio = 1;
 
-  if (str == "width") {
+  if (str == WINDOWSIZE.WIDTH) {
     if (imagedatavalue?.width != 0) {
-      calcratio = Math.round(size.width / Number(imagedatavalue?.width));
-      size.height = Number(imagedatavalue?.height) * calcratio;
+      calcratio = size.width / Number(imagedatavalue?.width);
+      size.height = Math.round(Number(imagedatavalue?.height) * calcratio);
     }
 
-  } else if (str == "height") {
+  } else if (str == WINDOWSIZE.HEIGHT) {
     if (imagedatavalue?.height != 0) {
-      calcratio = Math.round(size.height / Number(imagedatavalue?.height));
-      size.width = Number(imagedatavalue?.width) * calcratio;
+      calcratio = size.height / Number(imagedatavalue?.height);
+      size.width = Math.round(Number(imagedatavalue?.width) * calcratio);
     }
   } else {
     throw new Error("error");

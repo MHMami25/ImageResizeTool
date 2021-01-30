@@ -55,7 +55,6 @@ export default defineComponent({
             //入力値データ
             imagedata.inputsize.width = size.width;
             imagedata.inputsize.height = size.height;
-            console.log("imagedata" + imagedata);
             //一時フォルダ作成
             //imagedata.tmpFilePath = makeTmpDir();
             //リサイズ処理へ
@@ -117,8 +116,7 @@ const createReName = (filepath: string) => {
     format = path.extname(filepath);
     beforefilename = path.basename(filepath, format);
 
-    //仮のリネーム+01足しただけ
-    afterfilename = beforefilename + "_01";
+    afterfilename = beforefilename + "_" + String(date.get('day')) + String(date.get('hour')) + String(date.get('minute')) + String(date.get('second'));
 
     return path.resolve(dirname, afterfilename) + format;
 }
