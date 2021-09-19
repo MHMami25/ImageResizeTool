@@ -55,8 +55,6 @@ export default defineComponent({
             //入力値データ
             imagedata.inputsize.width = size.width;
             imagedata.inputsize.height = size.height;
-            //一時フォルダ作成
-            //imagedata.tmpFilePath = makeTmpDir();
             //リサイズ処理へ
             await doResizeImage(imagedata);
 
@@ -70,17 +68,6 @@ export default defineComponent({
         return { style, imagedata, getFiles, getResizeValue };
     },
 });
-
-//次のバージョンまで保留
-/*const makeTmpDir = () => {
-
-    //tmpディレクトリ作成
-    if (!fs.existsSync(DefineValueObject.appPath + "/tmp")) {
-        fs.mkdirSync(DefineValueObject.appPath + "/tmp");
-    }
-
-    return DefineValueObject.appPath + "/tmp/" + DefineValueObject.tmpFileName + ".png";
-}*/
 
 const getImageSize = (imagedata: ImageData, image: HTMLImageElement) => {
     imagedata.width = image.naturalWidth;
@@ -96,7 +83,7 @@ const doResizeImage = async (imagedata: ImageData) => {
             if (err) {
                 throw err;
             } else {
-                data.resize(Number(imagedata.width), Number(imagedata.height)).write(imagedata.afterFilePath);
+                data.resize(Number(imagedata.inputsize.width), Number(imagedata.inputsize.height)).write(imagedata.afterFilePath);
             }
         })
     } catch (err) {

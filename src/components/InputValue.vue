@@ -74,7 +74,6 @@
 }
 
 .inputvalue-inputarea {
- // margin-left: 5%;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -96,7 +95,6 @@
 }
 
 .inputvalue-buttonarea {
- // margin-right: 5%;
   display: flex;
   flex-wrap: wrap;
   align-content: center;
