@@ -83,7 +83,7 @@ const doResizeImage = async (imagedata: ImageData) => {
             if (err) {
                 throw err;
             } else {
-                data.resize(Number(imagedata.width), Number(imagedata.height)).write(imagedata.afterFilePath);
+                data.resize(Number(imagedata.inputsize.width), Number(imagedata.inputsize.height)).write(imagedata.afterFilePath);
             }
         })
     } catch (err) {
