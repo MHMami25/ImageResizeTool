@@ -29,7 +29,7 @@ async function createWindow() {
       contextIsolation: false,
       nodeIntegration: true,
 
-      webSecurity: process.env.NODE_ENV !== 'development'
+      webSecurity: false//process.env.NODE_ENV !== 'development'
     }
   })
 
