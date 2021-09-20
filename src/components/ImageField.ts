@@ -5,6 +5,7 @@ export default defineComponent({
   name: "ImageField",
   setup(props, context) {
     let isEnter = ref(false);
+    let isFile = ref(false);
     let files: FileListInterface = new FileListInterface();
 
     const dragEnter = () => {
@@ -13,18 +14,22 @@ export default defineComponent({
 
     const dragLeave = () => {
       isEnter.value = false;
+      isFile.value = false;
+      context.emit("changeFileEvent", isFile.value);
     };
 
     const dropFile = (event: any) => {
       files.setFileList(event.dataTransfer.files);
       context.emit("getFileEvent", files.getFileList());
       isEnter.value = false;
+      isFile.value = true;
+      context.emit("changeFileEvent", isFile.value);
     };
 
     onErrorCaptured((err, vm, info) => {
       return true;
     });
 
-    return { isEnter, dragEnter, dragLeave, dropFile };
+    return { isEnter, isFile, dragEnter, dragLeave, dropFile };
   },
 });

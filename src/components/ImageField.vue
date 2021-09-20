@@ -7,7 +7,9 @@
       @dragover.prevent
       @drop.prevent="dropFile"
       :class="{ enter: isEnter }"
-    ></div>
+    >
+      <h1 v-if="isFile">ファイルアップロード完了</h1>
+    </div>
   </div>
 </template>
 
@@ -35,5 +37,29 @@
 }
 .enter {
   border: 10px dotted powderblue;
+}
+
+h1 {
+  position: relative;
+  padding: 1em 0;
+}
+h1::before,
+h1::after {
+  position: absolute;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 6px;
+  box-sizing: border-box;
+}
+h1::before {
+  top: 0;
+  border-top: 2px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+h1::after {
+  bottom: 0;
+  border-top: 1px solid #ccc;
+  border-bottom: 2px solid #ccc;
 }
 </style>

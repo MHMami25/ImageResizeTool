@@ -5,13 +5,14 @@ import moment from "moment";
 import { FileListInterface } from "@/common/class/index";
 import { Size, ImageData } from "@/common/interface/index";
 import { DefineValueObject } from "@/common/lib/index";
-import { ImageField, InputValue } from "@/components/index";
+import { ImageField, InputValue, Message } from "@/components/index";
 
 export default defineComponent({
     name: "Body",
     components: {
         ImageField,
         InputValue,
+        Message
     },
 
     setup(prop, context) {
@@ -34,6 +35,9 @@ export default defineComponent({
             }
         });
 
+        let filename = ref("");
+        let resultflag = ref(false);
+
         //Image→Body:ファイルリストを取得
         const getFiles = (files: FileList) => {
             imagedata.files.setFileList(files);
@@ -46,18 +50,23 @@ export default defineComponent({
 
                 imagedata.beforeFilePath = files[0].path;
                 imagedata.afterFilePath = createReName(files[0].path);
+                //ファイル名の抽出
+                filename.value = getFileName(imagedata.beforeFilePath)
 
             }, false)
         };
 
-        //
+        //Image→Body:ドロップエリアに新規ファイルがドラッグされた場合に処理（メッセージ削除のため）
+        const changeFiles = (isFile: boolean) => {
+            resultflag.value = false;
+        }
+
         const getResizeValue = async (size: Size) => {
             //入力値データ
             imagedata.inputsize.width = size.width;
             imagedata.inputsize.height = size.height;
             //リサイズ処理へ
-            await doResizeImage(imagedata);
-
+            resultflag.value = await doResizeImage(imagedata);
         };
 
         //エラーハンドラー
@@ -65,7 +74,7 @@ export default defineComponent({
             return true;
         });
 
-        return { style, imagedata, getFiles, getResizeValue };
+        return { style, imagedata, filename, resultflag, getFiles, changeFiles, getResizeValue };
     },
 });
 
@@ -76,19 +85,26 @@ const getImageSize = (imagedata: ImageData, image: HTMLImageElement) => {
     return imagedata;
 }
 
-const doResizeImage = async (imagedata: ImageData) => {
-
-    try {
-        Jimp.read(imagedata.beforeFilePath, (err, data) => {
-            if (err) {
-                throw err;
-            } else {
-                data.resize(Number(imagedata.inputsize.width), Number(imagedata.inputsize.height)).write(imagedata.afterFilePath);
-            }
-        })
-    } catch (err) {
-        throw err;
-    }
+const doResizeImage = async (imagedata: ImageData): Promise<boolean> => {
+    return new Promise((resolve, reject) => {
+        try {
+            Jimp.read(imagedata.beforeFilePath, (err, data) => {
+                if (err) {
+                    throw err;
+                } else {
+                    data.resize(Number(imagedata.inputsize.width), Number(imagedata.inputsize.height)).write(imagedata.afterFilePath, (err) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(true);
+                        }
+                    });
+                }
+            })
+        } catch (err) {
+            reject(err);
+        }
+    })
 };
 
 const createReName = (filepath: string) => {
@@ -106,4 +122,8 @@ const createReName = (filepath: string) => {
     afterfilename = beforefilename + "_" + String(date.get('day')) + String(date.get('hour')) + String(date.get('minute')) + String(date.get('second'));
 
     return path.resolve(dirname, afterfilename) + format;
+}
+
+const getFileName = (filepath: string) => {
+    return filepath
 }
