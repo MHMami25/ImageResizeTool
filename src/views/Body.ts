@@ -56,6 +56,11 @@ export default defineComponent({
             }, false)
         };
 
+        //Image→Body:ドロップエリアに新規ファイルがドラッグされた場合に処理（メッセージ削除のため）
+        const changeFiles = (isFile: boolean) => {
+            resultflag.value = false;
+        }
+
         //
         const getResizeValue = async (size: Size) => {
             //入力値データ
@@ -72,7 +77,7 @@ export default defineComponent({
             return true;
         });
 
-        return { style, imagedata, filename, resultflag, getFiles, getResizeValue };
+        return { style, imagedata, filename, resultflag, getFiles, changeFiles, getResizeValue };
     },
 });
 

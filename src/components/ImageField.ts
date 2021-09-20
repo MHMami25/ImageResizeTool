@@ -15,6 +15,7 @@ export default defineComponent({
     const dragLeave = () => {
       isEnter.value = false;
       isFile.value = false;
+      context.emit("changeFileEvent", isFile.value);
     };
 
     const dropFile = (event: any) => {
@@ -22,6 +23,7 @@ export default defineComponent({
       context.emit("getFileEvent", files.getFileList());
       isEnter.value = false;
       isFile.value = true;
+      context.emit("changeFileEvent", isFile.value);
     };
 
     onErrorCaptured((err, vm, info) => {
