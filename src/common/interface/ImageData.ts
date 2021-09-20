@@ -1,5 +1,5 @@
-import Size from '@/common/interface/Size'
-import FileListInterface from '@/common/class/FileListInterface'
+import {Size} from '@/common/interface/index'
+import {FileListInterface} from '@/common/class/index'
 export default interface ImageData {
     files: FileListInterface;
     beforeFilePath: string,
