@@ -15,8 +15,6 @@ export default defineComponent({
         let resultflag = ref(false);
 
         watch(() => props, () => {
-            console.log(props.filename)
-            console.log(props.resultflag)
 
             if (props.filename != filename.value) {
                 filename.value = readResizingFile(props.filename)
