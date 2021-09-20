@@ -5,6 +5,7 @@
       :imagedatavalue="imagedata"
       @getResizeEvent="getResizeValue"
     ></InputValue>
+    <Message :filename="filename" :resultflag="resultflag"></Message>
   </div>
 </template>
 

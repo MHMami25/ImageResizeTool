@@ -67,7 +67,7 @@
 <style lang="scss">
 #inputvalue {
   width: 100%;
-  height: 30%;
+  height: 20%;
   display: flex;
   align-items: start;
   justify-content: center;
